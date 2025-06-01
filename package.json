@@ -1,0 +1,25 @@
+{
+  "name": "sandworm_indexer_sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sand-worm-labs/sandworm_indexer_sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sand-worm-labs/sandworm_indexer_sdk/issues"
+  },
+  "homepage": "https://github.com/sand-worm-labs/sandworm_indexer_sdk#readme",
+  "dependencies": {
+    "@mysten/sui": "^1.30.2"
+  }
+}

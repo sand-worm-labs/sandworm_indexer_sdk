@@ -1,0 +1,34 @@
+# Node.js dependencies
+/node_modules
+
+# Build outputs
+/dist
+/build
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Prisma client
+/prisma/client
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VSCode settings
+.vscode/
+
+# Optional: Ignore coverage reports if you use tests
+/coverage
+
+# Optional: Ignore lock files if you want (usually you don't)
+# package-lock.json
+# yarn.lock
