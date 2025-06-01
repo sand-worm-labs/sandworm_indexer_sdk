@@ -4,7 +4,7 @@ import { writeFileSync } from 'fs';
 import { parseEventFilterFile } from '@sdk/sui/utils';
 
 export class SuiBatchProcessor {
-  private client: SuiClient;
+  client: SuiClient;
   private eventFilters: Map<string, SuiEventFilter> = new Map();
   private cursors: Map<string, string | null> = new Map();
   private batchSize = 1000;
@@ -81,6 +81,10 @@ export class SuiBatchProcessor {
     
     const output = JSON.stringify(json, null, 2);
     writeFileSync(filePath, output, 'utf-8');
+  }
+
+  exportEventstoMap(): Map<string, SuiEventFilter> {
+    return this.eventFilters;
   }
 
 }

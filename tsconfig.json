@@ -24,8 +24,9 @@
       "@processor/*": ["sui/processor/src/*"],
       "@utils/*": ["sui/utils/*"]
     },
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "types": ["vitest/globals"]
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.d.ts", "*.ts"],
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.d.ts", "*.ts", "vitest.config.mts"],
   "exclude": ["dist", "node_modules", "examples"]
 }

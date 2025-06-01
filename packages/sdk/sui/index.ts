@@ -8,7 +8,7 @@
  */
 
 // Event type generator
-export * from './event_type_generator';
+export * from './event_type_generator/src';
 
 // Processor functionality
 export * from './processor/src';
