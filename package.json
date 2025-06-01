@@ -1,28 +1,43 @@
 {
   "name": "sandworm_indexer_sdk",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "private": false,
+  "workspaces": [
+    "packages/*",
+    "packages/sdk/*",
+    "examples/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sand-worm-labs/sandworm_indexer_sdk.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sand-worm-labs/sandworm_indexer_sdk/issues"
-  },
-  "homepage": "https://github.com/sand-worm-labs/sandworm_indexer_sdk#readme",
-  "dependencies": {
-    "@mysten/sui": "^1.30.2"
+    "build": "pnpm -r build",
+    "dev": "pnpm -r dev",
+    "test": "pnpm -r test",
+    "test:coverage": "pnpm -r test:coverage",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "docs:build": "pnpm -r docs:build",
+    "docs:serve": "pnpm -r docs:serve",
+    "clean": "pnpm -r clean",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
-    "@types/node": "^22.15.29"
+    "@changesets/cli": "^2.27.1",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.2.5",
+    "typedoc": "^0.28.5",
+    "typedoc-plugin-markdown": "^3.17.1",
+    "typescript": "^5.4.4"
+  },
+  "packageManager": "pnpm@8.15.1",
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "dependencies": {
+    "vitest": "^3.1.4"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",              // root folder for paths
+    "paths": {
+      "@sdk/*": ["packages/sdk/*"],
+      "@processor/*": ["sui/processor/src/*"],
+      "@utils/*": ["sui/utils/*"]
+    }
+  }
+}
