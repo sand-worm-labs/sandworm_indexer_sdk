@@ -1,10 +1,31 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",              // root folder for paths
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "es2020",
+    "lib": ["es2022"],
+    "moduleDetection": "force",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "allowImportingTsExtensions": false,
+    "baseUrl": ".",
     "paths": {
       "@sdk/*": ["packages/sdk/*"],
       "@processor/*": ["sui/processor/src/*"],
       "@utils/*": ["sui/utils/*"]
-    }
-  }
+    },
+    "downlevelIteration": true
+  },
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.d.ts", "*.ts"],
+  "exclude": ["dist", "node_modules", "examples"]
 }

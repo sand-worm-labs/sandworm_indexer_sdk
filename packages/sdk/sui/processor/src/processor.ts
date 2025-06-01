@@ -1,5 +1,5 @@
 import { SuiClient,SuiEventFilter } from '@mysten/sui/client';
-import { CursorStore, EventHandler, InMemoryCursorStore } from '@sdk';
+import { CursorStore, EventHandler, InMemoryCursorStore } from '@sdk/index';
 import { writeFileSync } from 'fs';
 import { parseEventFilterFile } from '@sdk/sui/utils';
 
@@ -37,10 +37,10 @@ export class SuiBatchProcessor {
   }
 
   async loadCursors() {
-    for (const eventName of this.eventFilters.keys()) {
-      const cursor = await this.cursorStore.getCursor(eventName);
-      this.cursors.set(eventName, cursor);
-    }
+    // for (const eventName of this.eventFilters.keys()) {
+    //   const cursor = await this.cursorStore.getCursor(eventName);
+    //   this.cursors.set(eventName, cursor);
+    // }
   }
 
     // Getter for batchSize
@@ -78,7 +78,7 @@ export class SuiBatchProcessor {
     for (const [name, filter] of this.eventFilters.entries()) {
       json[name] = filter;
     }
-
+    
     const output = JSON.stringify(json, null, 2);
     writeFileSync(filePath, output, 'utf-8');
   }
