@@ -1,7 +1,7 @@
 import { SuiClient,SuiEventFilter } from '@mysten/sui/client';
-import { CursorStore, EventHandler, InMemoryCursorStore } from './interface';
+import { CursorStore, EventHandler, InMemoryCursorStore } from '@sdk';
 import { writeFileSync } from 'fs';
-import { parseEventFilterFile } from '../../utils';
+import { parseEventFilterFile } from '@sdk/sui/utils';
 
 export class SuiBatchProcessor {
   private client: SuiClient;
