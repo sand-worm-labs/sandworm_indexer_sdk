@@ -35,7 +35,6 @@ export class EventTypeGenerator {
         }
       }
     }
-
     return Array.from(eventTypes);
   }
 
@@ -44,7 +43,7 @@ export class EventTypeGenerator {
    * Returns the raw JSON data of the event or null if none found.
    */
   async querySampleEvent(moveEventType: SuiEventFilter, eventName: string): Promise<any> {
-    let foundEvents =   await this.processor.client.queryEvents({
+    let foundEvents =  await this.processor.client.queryEvents({
       query:moveEventType,
       limit: 1000,
       order:"descending",

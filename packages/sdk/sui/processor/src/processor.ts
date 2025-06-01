@@ -5,7 +5,7 @@ import { parseEventFilterFile } from "@worm_sdk/sui/utils";
 
 export class SuiBatchProcessor {
   client: SuiClient;
-  private url: string = "https://fullnode.devnet.sui.io:443'";
+  private url: string = "https://fullnode.devnet.sui.io:443";
   private eventFilters: Map<string, SuiEventFilter> = new Map();
   private cursors: Map<string, string | null> = new Map();
   private batchSize = 1000;   

@@ -29,17 +29,40 @@ vi.mock('json-to-ts', () => {
 // -----------------------------------------------------
 
 describe('EventTypeGenerator', () => {
+
   let fakeProcessor = new SuiBatchProcessor().addEvent('AlphaEvent', { MoveEventType: '0x1::mod::Alpha' }).addEvent('BetaEvent', { MoveEventType: '0x1::mod::Beta' })
-  beforeEach(() => {
-    // Reset mocks before each test
+  let data = {  
+    "amount": "100099",
+    "asset": {
+      "name": "5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN"
+    },
+    "borrow_fee": "100",
+    "borrower": "0xba790950d26e9aebf6c903769c8f2c5b8d270656568f0ec97277dae5d6e940c9",
+    "obligation": "0xfeb669c022744165719442316e3abf4828cfa06e2664fbb760bce9ac6fe684ef",
+    "time": "1700394636"
+  }
+
+   beforeEach(() => {
     vi.clearAllMocks()
 
+    fakeProcessor = new SuiBatchProcessor()
+      .addEvent('AlphaEvent', { MoveEventType: '0x1::mod::Alpha' })
+      .addEvent('BetaEvent', { MoveEventType: '0x1::mod::Beta' });
+
+    // Mock the queryEvents method
+    fakeProcessor.client.queryEvents = vi.fn().mockResolvedValue({
+      data: [
+        {
+          parsedJson: data,
+        },
+      ],
+    }) as any;
   })
+
 
   it('collectEventTypes gathers all unique MoveEventType strings', () => {
     const gen = new EventTypeGenerator(fakeProcessor)
-    const types = gen.collectEventTypes()
-    // Should find "0x1::mod::Alpha" and "0x1::mod::Beta" only once each
+    const types = gen.collectEventTypes() 
     expect(types.sort()).toEqual(['0x1::mod::Alpha', '0x1::mod::Beta'])
   })
 
@@ -50,20 +73,13 @@ describe('EventTypeGenerator', () => {
     // Our mock returns a single-element array: ["export interface MyRoot { /* ... */ }"]
     expect(tsText).toContain('export interface MyRoot')
     expect(tsText).toContain('{ /* ... */ }')
-    // Verify that json-to-ts was called with correct arguments
-    // const jsonToTS = (await vi.importMocked('json-to-ts')).default as vi.Mock
-    // expect(jsonToTS).toHaveBeenCalledWith(sampleJson, { rootName: 'MyRoot' })
   })
 
   it('querySampleEvent fetches parsedJson from client.queryEvents', async () => {
     const gen = new EventTypeGenerator(fakeProcessor as SuiBatchProcessor)
-    // Call with a MoveEventType filter
-    const filter: SuiEventFilter = { MoveEventType: '0x1::mod::Alpha' }
-    const result = await gen.querySampleEvent(filter, 'AlphaEvent')
-    // Our fake returns { sample: filter.MoveEventType }
-    expect(result).toEqual({ sample: '0x1::mod::Alpha' })
-
-    // Verify that client.queryEvents was called with correct query object
+    const filter: SuiEventFilter = { MoveEventType: '0xc38f849e81cfe46d4e4320f508ea7dda42934a329d5a6571bb4c3cb6ea63f5da::borrow::BorrowEventV2' }
+    const result = await gen.querySampleEvent(filter, 'BorrowEventV2')
+    expect(result).toEqual(data)
     expect(fakeProcessor.client.queryEvents).toHaveBeenCalledWith({
       query: filter,
       limit: 1000,
