@@ -20,9 +20,8 @@
     "allowImportingTsExtensions": false,
     "baseUrl": ".",
     "paths": {
-      "@sdk/*": ["packages/sdk/*"],
-      "@processor/*": ["sui/processor/src/*"],
-      "@utils/*": ["sui/utils/*"]
+      "@worm_sdk/*": ["packages/sdk/*"],
+      "@worm_utils/*": ["packages/utils/*"]
     },
     "downlevelIteration": true,
     "types": ["vitest/globals"]

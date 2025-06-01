@@ -1,12 +1,17 @@
 import { defineConfig } from 'vitest/config';
+import path from 'path'
 
 export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
+    alias: {
+      '@worm_sdk': path.resolve(__dirname, 'packages/sdk'),
+      '@worm_utils': path.resolve(__dirname, 'packages/utils'),
+    },
     include: [
-      'packages/**/*.{test,spec}.{js,ts}',
-      'packages/**/test/**/*.{js,ts}'
+      'test/**/*.{test,spec}.{js,ts}',
+      '**/*.{test,spec}.{js,ts}',
     ],
     exclude: [
       'node_modules',

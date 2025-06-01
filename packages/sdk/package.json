@@ -1,8 +1,11 @@
 {
-  "name": "sdk",
+  "name": "worm_indexer_sdk",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "vitest run"
+   },
   "devDependencies": {
     "@types/node": "^22.15.29"
   },

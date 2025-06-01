@@ -1,10 +1,11 @@
 import { SuiClient,SuiEventFilter } from '@mysten/sui/client';
-import { CursorStore, EventHandler, InMemoryCursorStore } from '@sdk/index';
+import { CursorStore, EventHandler, InMemoryCursorStore } from "@worm_sdk/sui/processor";
 import { writeFileSync } from 'fs';
-import { parseEventFilterFile } from '@sdk/sui/utils';
+import { parseEventFilterFile } from "@worm_sdk/sui/utils";
 
 export class SuiBatchProcessor {
   client: SuiClient;
+  private url: string = "https://fullnode.devnet.sui.io:443'";
   private eventFilters: Map<string, SuiEventFilter> = new Map();
   private cursors: Map<string, string | null> = new Map();
   private batchSize = 1000;   
@@ -12,13 +13,18 @@ export class SuiBatchProcessor {
   private cursorStore: CursorStore;
 
   constructor() {
-    this.client = new SuiClient({ url: 'https://fullnode.devnet.sui.io:443' });
+    this.client = new SuiClient({ url: this.url });
     this.cursorStore = new InMemoryCursorStore();
   }
 
   setClientUrl(url: string): this {
     this.client = new SuiClient({ url });
+    this.url = url;
     return this;
+  }
+
+  getClientUrl(): string {
+    return this.url;
   }
 
   addEvent(eventName: string, filter: SuiEventFilter): this {
