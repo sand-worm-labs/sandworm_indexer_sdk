@@ -7,7 +7,7 @@ export class SuiBatchProcessor {
   client: SuiClient;
   private eventFilters: Map<string, SuiEventFilter> = new Map();
   private cursors: Map<string, string | null> = new Map();
-  private batchSize = 1000;
+  private batchSize = 1000;   
   private pollingInterval = 1000; // ms
   private cursorStore: CursorStore;
 

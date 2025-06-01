@@ -1,4 +1,4 @@
-import { EventFilterMap, SuiBatchProcessor } from "@sdk/sui/processor/src";
+import { EventFilterMap, SuiBatchProcessor } from "@sdk/sui/processor";
 import { SuiClient, SuiEvent, SuiEventFilter } from "@mysten/sui/client";
 import  jsonToTS  from "json-to-ts";
 import { mkdirSync, writeFileSync } from "fs";
