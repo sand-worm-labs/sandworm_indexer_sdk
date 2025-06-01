@@ -5,6 +5,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
+    silent:false,
+    reporters: 'verbose',
     alias: {
       '@worm_sdk': path.resolve(__dirname, 'packages/sdk'),
       '@worm_utils': path.resolve(__dirname, 'packages/utils'),

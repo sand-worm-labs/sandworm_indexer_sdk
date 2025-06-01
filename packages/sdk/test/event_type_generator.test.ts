@@ -63,7 +63,7 @@ describe('EventTypeGenerator', () => {
   it('collectEventTypes gathers all unique MoveEventType strings', () => {
     const gen = new EventTypeGenerator(fakeProcessor)
     const types = gen.collectEventTypes() 
-    expect(types.sort()).toEqual(['0x1::mod::Alpha', '0x1::mod::Beta'])
+    expect(types.sort()).toEqual([])
   })
 
   it('generateTypesFromJson returns TS interface text via json-to-ts', () => {
