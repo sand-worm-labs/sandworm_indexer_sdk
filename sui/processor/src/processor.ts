@@ -1,18 +1,19 @@
 import { SuiClient,SuiEventFilter } from '@mysten/sui/client';
-import { CursorStore, EventHandler } from './interface';
+import { CursorStore, EventHandler, InMemoryCursorStore } from './interface';
+import { writeFileSync } from 'fs';
+import { parseEventFilterFile } from '../../utils';
 
-class SuiProcessor {
+export class SuiBatchProcessor {
   private client: SuiClient;
   private eventFilters: Map<string, SuiEventFilter> = new Map();
   private cursors: Map<string, string | null> = new Map();
   private batchSize = 1000;
   private pollingInterval = 1000; // ms
   private cursorStore: CursorStore;
-  private handler?: EventHandler<any>;
 
-  constructor(client: SuiClient, cursorStore: CursorStore) {
-    this.client = client;
-    this.cursorStore = cursorStore;
+  constructor() {
+    this.client = new SuiClient({ url: 'https://fullnode.devnet.sui.io:443' });
+    this.cursorStore = new InMemoryCursorStore();
   }
 
   setClientUrl(url: string): this {
@@ -20,7 +21,7 @@ class SuiProcessor {
     return this;
   }
 
-  addEvent(filter: SuiEventFilter, eventName: string): this {
+  addEvent(eventName: string, filter: SuiEventFilter): this {
     this.eventFilters.set(eventName, filter);
     return this;
   }
@@ -53,36 +54,33 @@ class SuiProcessor {
     return this.pollingInterval;
   }
 
+  /**
+   * Loads event filters from a JSON file and adds them to the processor.
+   * @param filePath - The path to the JSON file containing the event filters.
+   * @returns The current instance of SuiBatchProcessor for method chaining.
+   */
 
-  onEvents(handler: EventHandler<any>): this {
-    this.handler = handler;
+  loadEventsFromFile(filePath: string): this {
+    const filters =  parseEventFilterFile(filePath);
+    for (const [name, filter] of Object.entries(filters)) {
+      this.addEvent(name, filter);
+    }
     return this;
   }
 
-  async run() {
-    // if (!this.handler) throw new Error("Event handler not set. Use onEvents()");
 
-    // await this.loadCursors();
+  /**
+   * Saves the event filters to a JSON file.
+   * @param filePath - The path to the JSON file to write to.
+   */
+  exportEventsToFile(filePath: string): void {
+    const json: Record<string, SuiEventFilter> = {};
+    for (const [name, filter] of this.eventFilters.entries()) {
+      json[name] = filter;
+    }
 
-    // while (true) {
-    //   for (const [eventName, filter] of this.eventFilters.entries()) {
-    //     const cursor = this.cursors.get(eventName) ?? null;
-
-    //     // Fetch batch of events from Sui node using client and cursor
-    //     const events = await this.client.queryEvents({
-    //       query: filter,
-    //       cursor,
-    //       limit: this.batchSize,
-    //     });
-
-    //     if (events.length > 0) {
-    //       await this.handler(events, async (newCursor) => {
-    //         this.cursors.set(eventName, newCursor);
-    //         await this.cursorStore.saveCursor(eventName, newCursor);
-    //       });
-    //     }
-    //   }
-    //   await new Promise((r) => setTimeout(r, this.pollingInterval));
-    // }
+    const output = JSON.stringify(json, null, 2);
+    writeFileSync(filePath, output, 'utf-8');
   }
+
 }
