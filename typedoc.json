@@ -1,6 +1,6 @@
 {
   "entryPoints": ["packages/*"],
-  "name": "Streamflow SDK",
+  "name": "Sandworm SDK",
   "entryPointStrategy": "packages",
   "includeVersion": false,
   "exclude": ["examples/*"],
