@@ -18,7 +18,6 @@
     "local-unpublish": "lerna exec -- npm unpublish --registry=\"http://localhost:4873/\" \"\\${LERNA_PACKAGE_NAME}@\\$(npm view \\$LERNA_PACKAGE_NAME version)\"",
     "local-unpublish-all": "lerna exec -- npm unpublish -f --registry=\"http://localhost:4873/\" \"\\${LERNA_PACKAGE_NAME}\"",
     "prepare": "husky install",
-    "convert-bn": "./scripts/convertBN.sh",
     "examples:verify": "pnpm --filter \"./examples/*\" run verify",
     "examples:install": "pnpm --filter \"./examples/*\" install",
     "examples:build": "pnpm --filter \"./examples/*\" --parallel run build",
