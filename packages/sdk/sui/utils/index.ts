@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { SuiEventFilter } from '@mysten/sui/client';
+import type { SuiEventFilter } from '@mysten/sui/client';
 
 type RawEventFilters = Record<string, unknown>;
 
