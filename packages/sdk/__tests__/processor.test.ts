@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { SuiBatchProcessor } from "@worm_sdk/sui/processor";
-import { SuiEventFilter } from '@mysten/sui/client';
+import type { SuiEventFilter } from '@mysten/sui/client';
 import * as fs from 'fs';
 
 vi.mock('@sdk/sui/utils', () => ({
@@ -51,6 +51,7 @@ describe('SuiBatchProcessor', () => {
       const fakeFilter: SuiEventFilter = {MoveEventType: '0x123::test::event' };
       // @ts-ignore: accessing private map directly for test
       processor.addEvent('TestEvent', fakeFilter);
+      return processor;
     })
 
     processor.loadEventsFromFile('./event/path.json');
