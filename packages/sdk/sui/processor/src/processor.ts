@@ -43,10 +43,10 @@ export class SuiBatchProcessor {
   }
 
   async loadCursors() {
-    // for (const eventName of this.eventFilters.keys()) {
-    //   const cursor = await this.cursorStore.getCursor(eventName);
-    //   this.cursors.set(eventName, cursor);
-    // }
+    for (const eventName of this.eventFilters.keys()) {
+      const cursor = await this.cursorStore.getCursor(eventName);
+      this.cursors.set(eventName, cursor);
+    }
   }
 
     // Getter for batchSize

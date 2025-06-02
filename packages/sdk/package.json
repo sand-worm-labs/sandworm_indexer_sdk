@@ -5,11 +5,12 @@
   "license": "MIT",
   "scripts": {
     "test": "vitest run --silent=false"
-   },
+  },
   "devDependencies": {
     "@types/node": "^22.15.29"
   },
   "dependencies": {
+    "@prisma/client": "^6.8.2",
     "json-to-ts": "^2.1.0"
   }
 }
