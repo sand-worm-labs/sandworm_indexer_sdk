@@ -1,6 +1,7 @@
 {
   "name": "@sandworm/sdk",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -11,6 +12,9 @@
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",
-    "json-to-ts": "^2.1.0"
+    "json-to-ts": "^2.1.0",
+    "@mysten/sui": "1.12.0",
+    "p-queue": "^8.0.1",
+    "p-retry": "^6.2.1"
   }
 }

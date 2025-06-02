@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json", 
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2020",
+    "verbatimModuleSyntax": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "paths": {
+      "@worm_sdk/*": ["./"]
+  },
+  },
+  "include" : [".", "tsup.config.ts", "globals.d.ts"],
+  "exclude": ["dist", "node_modules"],
+}

@@ -1,4 +1,4 @@
-import { SuiEventFilter } from "@mysten/sui/client";
+import type { SuiEventFilter } from "@mysten/sui/client";
 
 export interface CursorStore {
   getCursor(eventName: string): Promise<string | null>;

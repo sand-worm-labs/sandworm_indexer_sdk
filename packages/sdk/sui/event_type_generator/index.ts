@@ -1,5 +1,5 @@
-import { EventFilterMap, SuiBatchProcessor } from "@worm_sdk/sui/processor";
-import { SuiClient, SuiEvent, SuiEventFilter } from "@mysten/sui/client";
+import { SuiBatchProcessor } from "@worm_sdk/sui/processor";
+import type { SuiClient, SuiEvent, SuiEventFilter } from "@mysten/sui/client";
 import  jsonToTS  from "json-to-ts";
 import { mkdirSync, writeFileSync } from "fs";
 import { join } from "path";

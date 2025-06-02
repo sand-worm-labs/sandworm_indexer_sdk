@@ -1,1 +1,2 @@
-export * from "./InMemoryCustorStore"
+export * from "./InMemoryCustorStore";
+export * from "./PrismaCustorStore";

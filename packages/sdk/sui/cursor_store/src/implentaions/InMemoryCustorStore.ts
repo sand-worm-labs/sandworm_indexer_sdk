@@ -1,4 +1,4 @@
-import { CursorStore } from "../interface";
+import type { CursorStore } from "../interface";
 
 /**
  * InMemoryCursorStore is a simple in-memory implementation of the CursorStore interface.

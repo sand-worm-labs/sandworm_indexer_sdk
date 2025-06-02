@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { CursorStore } from '../interface';
+import type { CursorStore } from '../interface';
 
 /**
  * Prisma-backed implementation of CursorStore for persistent cursor tracking.

@@ -1,5 +1,5 @@
-import { SuiClient,SuiEventFilter } from '@mysten/sui/client';
-import { CursorStore, EventHandler, InMemoryCursorStore } from "@worm_sdk/sui/processor";
+import { SuiClient, type SuiEventFilter } from '@mysten/sui/client';
+import { type CursorStore, InMemoryCursorStore } from "@worm_sdk/sui/processor";
 import { writeFileSync } from 'fs';
 import { parseEventFilterFile } from "@worm_sdk/sui/utils";
 
