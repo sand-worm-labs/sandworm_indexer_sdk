@@ -1,1 +1,2 @@
-export * from "./src";
+export * from "./src/processor";
+export * from "./src/interface";
