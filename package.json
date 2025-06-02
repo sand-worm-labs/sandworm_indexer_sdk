@@ -1,44 +1,48 @@
 {
-  "name": "worm_indexer",
-  "version": "0.0.1",
-  "description": "",
-  "private": false,
+  "name": "root",
   "type": "module",
-  "workspaces": [
-    "packages/*",
-    "packages/sdk/*",
-    "examples/*"
-  ],
+  "license": "MIT",
   "scripts": {
-    "build": "pnpm -r build",
-    "dev": "pnpm -r dev",
-    "test": "pnpm -r test",
-    "test:coverage": "pnpm -r test:coverage",
-    "lint": "pnpm -r lint",
-    "lint:fix": "pnpm -r lint:fix",
-    "docs:build": "pnpm -r docs:build",
-    "docs:serve": "pnpm -r docs:serve",
-    "clean": "pnpm -r clean",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish"
+    "build": "lerna run build",
+    "build-docs": "typedoc packages/stream/index.ts",
+    "pack": "lerna run pack",
+    "test": "lerna run test",
+    "lint": "lerna run lint",
+    "tsc:lint": "lerna run tsc:lint",
+    "docs:build": "lerna exec -- typedoc",
+    "validate-types": "lerna exec -- attw --pack --profile node16 .",
+    "validate-packages": "lerna exec -- publint && pnpm validate-types",
+    "version-all": "lerna version --force-publish --no-git-tag-version --no-push",
+    "publish": "pnpm validate-packages && lerna publish from-package --yes --loglevel=verbose",
+    "local-publish": "lerna publish --no-git-tag-version --no-push --registry=\"http://localhost:4873/\" from-package --yes",
+    "local-unpublish": "lerna exec -- npm unpublish --registry=\"http://localhost:4873/\" \"\\${LERNA_PACKAGE_NAME}@\\$(npm view \\$LERNA_PACKAGE_NAME version)\"",
+    "local-unpublish-all": "lerna exec -- npm unpublish -f --registry=\"http://localhost:4873/\" \"\\${LERNA_PACKAGE_NAME}\"",
+    "prepare": "husky install",
+    "convert-bn": "./scripts/convertBN.sh",
+    "examples:verify": "pnpm --filter \"./examples/*\" run verify",
+    "examples:install": "pnpm --filter \"./examples/*\" install",
+    "examples:build": "pnpm --filter \"./examples/*\" --parallel run build",
+    "examples": "pnpm examples:install && pnpm examples:build && pnpm examples:verify",
+    "watch:docs": "typedoc --out dist/docs",
+    "watch:docs:serve": "pnpx serve dist/docs -p 51921",
+    "serve:docs": "pnpm run --stream \"/^watch:docs.*/\""
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.1",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.0.0",
-    "prettier": "^3.2.5",
-    "typedoc": "^0.28.5",
-    "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "^5.4.4"
+    "@arethetypeswrong/cli": "0.17.4",
+    "@types/eslint": "^8.56.3",
+    "eslint": "^8.56.0",
+    "eslint-import-resolver-typescript": "3.8.3",
+    "husky": "^8.0.0",
+    "lerna": "7.4.2",
+    "lint-staged": "^13.1.0",
+    "publint": "0.3.8",
+    "tsup": "^8.0.2",
+    "typedoc": "0.27.8",
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.5"
   },
-  "packageManager": "pnpm@8.15.1",
+  "version": "4.0.1",
   "engines": {
-    "node": ">=22.0.0",
-    "pnpm": ">=8.0.0"
-  },
-  "dependencies": {
-    "vitest": "^3.1.4"
+    "node": ">=18"
   }
 }

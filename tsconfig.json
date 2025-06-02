@@ -11,21 +11,14 @@
     "allowJs": true,
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "verbatimModuleSyntax": false,
+    "verbatimModuleSyntax": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "allowImportingTsExtensions": false,
-    "baseUrl": ".",
-    "paths": {
-      "@worm_sdk/*": ["packages/sdk/*"],
-      "@worm_utils/*": ["packages/utils/*"]
-    },
-    "downlevelIteration": true,
-    "types": ["vitest/globals"]
+    "allowImportingTsExtensions": false
   },
-  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.d.ts", "*.ts", "vitest.config.mts"],
+  "include": ["./**/*.ts", "./**/*.tsx", "./**/*.d.ts", "*.ts"],
   "exclude": ["dist", "node_modules", "examples"]
 }
