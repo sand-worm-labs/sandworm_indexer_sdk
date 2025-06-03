@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build",
-    "build-docs": "typedoc packages/stream/index.ts",
+    "build-docs": "typedoc packages/sdk/index.ts",
     "pack": "lerna run pack",
     "test": "lerna run test",
     "lint": "lerna run lint",
