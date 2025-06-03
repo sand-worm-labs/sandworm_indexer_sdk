@@ -44,7 +44,11 @@
   "engines": {
     "node": ">=18"
   },
-  "dependencies": {
-    "vite-tsconfig-paths": "^5.1.4"
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sand-worm-labs/sandworm_indexer_sdk.git"
   }
 }

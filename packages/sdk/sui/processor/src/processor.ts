@@ -1,8 +1,9 @@
 import { SuiClient, type SuiEventFilter } from '@mysten/sui/client';
 import { writeFileSync } from 'fs';
-
-import { type CursorStore, InMemoryCursorStore } from "@worm_sdk/sui/processor";
 import { parseEventFilterFile } from "@worm_sdk/sui/utils";
+import InMemoryCursorStore from '../../cursor_store/src/implentaions/InMemoryCustorStore';
+import type CursorStore from '../../cursor_store/src/interface';
+
 
 export  default class SuiBatchProcessor {
   client: SuiClient;

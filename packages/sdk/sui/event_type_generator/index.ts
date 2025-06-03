@@ -2,10 +2,9 @@ import type { SuiClient, SuiEvent, SuiEventFilter } from "@mysten/sui/client";
 import  jsonToTS  from "json-to-ts";
 import { mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
+import SuiBatchProcessor from "../processor/src/processor";
 
-import { type SuiBatchProcessor } from "@worm_sdk/sui/processor";
-
-export class EventTypeGenerator {
+export default class EventTypeGenerator {
   private processor: SuiBatchProcessor;
 
   private generatePath = "./generate_event_types";

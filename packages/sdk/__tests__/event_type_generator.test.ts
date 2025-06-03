@@ -2,8 +2,8 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { SuiEventFilter } from '@mysten/sui/client';
-
-import { EventTypeGenerator, SuiBatchProcessor } from '@worm_sdk/sui/event_type_generator';
+import SuiBatchProcessor from '../sui/processor/src/processor';
+import EventTypeGenerator  from '../sui/event_type_generator';
 
 // -- Mocks for fs and json-to-ts ----------------------
 
