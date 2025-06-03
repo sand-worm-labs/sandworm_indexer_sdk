@@ -1,0 +1,29 @@
+{
+  "name": "@sandworm/sui_cetus-example",
+  "version": "8.1.0",
+  "description": "> TODO: description",
+  "author": "Angry Coding <mailidanielifechukwu@gmail.com>",
+  "homepage": "https://github.com/sand-worm-labs/sandworm_indexer_sdk#readme",
+  "license": "ISC",
+  "main": "lib/sui_cetus-example.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sand-worm-labs/sandworm_indexer_sdk.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/@sandworm/sui_cetus-example.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/sand-worm-labs/sandworm_indexer_sdk/issues"
+  }
+}
