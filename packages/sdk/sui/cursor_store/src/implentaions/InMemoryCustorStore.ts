@@ -7,7 +7,7 @@ import type { CursorStore } from "../interface";
  * 
  * NOTE: This implementation does NOT persist across application restarts.
  */
-export class InMemoryCursorStore implements CursorStore {
+export default class InMemoryCursorStore implements CursorStore {
   private store: Map<string, string> = new Map();
 
   /**

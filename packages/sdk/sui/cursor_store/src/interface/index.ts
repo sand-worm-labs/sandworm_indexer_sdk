@@ -2,7 +2,7 @@
  * CursorStore defines a storage interface for managing event stream cursors.
  * This is useful for resuming processing from a specific point.
  */
-export interface CursorStore {
+export default interface CursorStore {
   /**
    * Retrieves the saved cursor for a given event stream.
    * @param eventName - A unique identifier for the event stream (e.g. "SwapEvent", "TransferEvent").

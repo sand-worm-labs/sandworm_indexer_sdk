@@ -1,3 +1,3 @@
 
 // Sui exports  
-export * from './sui';
+export * as SuiWorm from  './sui';

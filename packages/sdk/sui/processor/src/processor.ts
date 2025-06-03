@@ -1,15 +1,22 @@
 import { SuiClient, type SuiEventFilter } from '@mysten/sui/client';
-import { type CursorStore, InMemoryCursorStore } from "@worm_sdk/sui/processor";
 import { writeFileSync } from 'fs';
+
+import { type CursorStore, InMemoryCursorStore } from "@worm_sdk/sui/processor";
 import { parseEventFilterFile } from "@worm_sdk/sui/utils";
 
-export class SuiBatchProcessor {
+export  default class SuiBatchProcessor {
   client: SuiClient;
+
   private url: string = "https://fullnode.devnet.sui.io:443";
+
   private eventFilters: Map<string, SuiEventFilter> = new Map();
+
   private cursors: Map<string, string | null> = new Map();
-  private batchSize = 1000;   
+
+  private batchSize = 1000;
+   
   private pollingInterval = 1000; // ms
+
   private cursorStore: CursorStore;
 
   constructor() {
@@ -54,7 +61,6 @@ export class SuiBatchProcessor {
     return this.batchSize;
   }
 
-
   // Getter for pollingInterval
   getPollingInterval(): number {
     return this.pollingInterval;
@@ -73,7 +79,6 @@ export class SuiBatchProcessor {
     }
     return this;
   }
-
 
   /**
    * Saves the event filters to a JSON file.

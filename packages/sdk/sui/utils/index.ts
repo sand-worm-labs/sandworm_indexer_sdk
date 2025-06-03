@@ -3,7 +3,6 @@ import type { SuiEventFilter } from '@mysten/sui/client';
 
 type RawEventFilters = Record<string, unknown>;
 
-
 function isValidSuiEventFilter(filter: any): filter is SuiEventFilter {
   if (typeof filter !== 'object' || filter === null) return false;
 

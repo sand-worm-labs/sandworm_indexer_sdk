@@ -1,6 +1,8 @@
-export class BatchInsert<T> {
+export default class BatchInsert<T> {
   data: T[];
+
   skipDuplicates: boolean;
+
   constructor(data: T[], skipDuplicates = false) {
     this.data = data;
     this.skipDuplicates = skipDuplicates;
@@ -9,6 +11,7 @@ export class BatchInsert<T> {
   add(item: T) {
     this.data.push(item);
   }
+
   size(): number {
     return this.data.length;
   }

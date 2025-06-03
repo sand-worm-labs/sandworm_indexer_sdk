@@ -1,2 +1,2 @@
-export * from "./src/implentaions"
-export * from "./src/interface"
+export * from "./src/implentaions";
+export * from "./src/interface";

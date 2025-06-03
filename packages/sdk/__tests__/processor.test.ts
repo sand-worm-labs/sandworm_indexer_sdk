@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { SuiBatchProcessor } from "@worm_sdk/sui/processor";
 import type { SuiEventFilter } from '@mysten/sui/client';
 import * as fs from 'fs';
+
+import { SuiBatchProcessor } from "@worm_sdk/sui/processor";
 
 vi.mock('@sdk/sui/utils', () => ({
   parseEventFilterFile: vi.fn(() => ({
@@ -48,17 +49,17 @@ describe('SuiBatchProcessor', () => {
   it('loads events from file', () => {
     
     vi.spyOn(processor, 'loadEventsFromFile').mockImplementation((_filePath: string) => {
-      const fakeFilter: SuiEventFilter = {MoveEventType: '0x123::test::event' };
+      const fakeFilter: SuiEventFilter = { MoveEventType: '0x123::test::event' };
       // @ts-ignore: accessing private map directly for test
       processor.addEvent('TestEvent', fakeFilter);
       return processor;
-    })
+    });
 
     processor.loadEventsFromFile('./event/path.json');
     const events = processor.exportEventstoMap();
     expect(events.has('TestEvent')).toBe(true);
     expect(events.get('TestEvent')).toEqual({
-      MoveEventType: '0x123::test::event'
+      MoveEventType: '0x123::test::event',
     });
   });
 
@@ -78,7 +79,7 @@ describe('SuiBatchProcessor', () => {
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       './event/file.json',
       JSON.stringify({ MyEvent: filter, MyEvent2: filter2 }, null, 2),
-      'utf-8'
+      'utf-8',
     );
   });
 

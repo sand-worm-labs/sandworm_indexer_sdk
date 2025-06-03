@@ -1,10 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+
 import type { CursorStore } from '../interface';
 
 /**
  * Prisma-backed implementation of CursorStore for persistent cursor tracking.
  */
-export class PrismaCursorStore implements CursorStore {
+export default class PrismaCursorStore implements CursorStore {
   private prisma: PrismaClient;
 
   constructor(prismaClient?: PrismaClient) {

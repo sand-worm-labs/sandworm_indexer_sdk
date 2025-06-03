@@ -1,15 +1,17 @@
-import { SuiBatchProcessor } from "@worm_sdk/sui/processor";
 import type { SuiClient, SuiEvent, SuiEventFilter } from "@mysten/sui/client";
 import  jsonToTS  from "json-to-ts";
 import { mkdirSync, writeFileSync } from "fs";
 import { join } from "path";
 
+import { type SuiBatchProcessor } from "@worm_sdk/sui/processor";
+
 export class EventTypeGenerator {
   private processor: SuiBatchProcessor;
+
   private generatePath = "./generate_event_types";
 
   constructor(processor: SuiBatchProcessor) {
-    this.processor =processor;
+    this.processor = processor;
   }
 
   setGeneratePath(path: string) {
@@ -43,7 +45,7 @@ export class EventTypeGenerator {
    * Returns the raw JSON data of the event or null if none found.
    */
   async querySampleEvent(moveEventType: SuiEventFilter, eventName: string): Promise<any> {
-    let foundEvents =  await this.processor.client.queryEvents({
+    const foundEvents =  await this.processor.client.queryEvents({
       query:moveEventType,
       limit: 1000,
       order:"descending",
@@ -76,7 +78,7 @@ export class EventTypeGenerator {
       try {
         const json = await this.querySampleEvent(
           { MoveEventType: moveEventType },
-          moveEventType
+          moveEventType,
         );
 
         const typeName = moveEventType.replace(/[:<>]/g, "_");

@@ -1,49 +1,49 @@
 // packages/sdk/sui/event_type_generator/event_type_generator.spec.ts
 
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import type { SuiEventFilter } from '@mysten/sui/client'
-import { EventTypeGenerator } from '@worm_sdk/sui/event_type_generator'
-import { SuiBatchProcessor } from '@worm_sdk/sui/processor'
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import type { SuiEventFilter } from '@mysten/sui/client';
+
+import { EventTypeGenerator, SuiBatchProcessor } from '@worm_sdk/sui/event_type_generator';
 
 // -- Mocks for fs and json-to-ts ----------------------
 
 vi.mock('fs', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('fs')>()
+  const actual = await importOriginal<typeof import('fs')>();
   return {
     ...actual,
     mkdirSync: vi.fn(),
     writeFileSync: vi.fn(),
-  }
-})
+  };
+});
 
 vi.mock('json-to-ts', () => {
   return {
     __esModule: true,
     default: vi.fn((json: any, opts: any) => {
       // Return a dummy interface string based on rootName
-      return [`export interface ${opts.rootName} { /* ... */ }`]
+      return [`export interface ${opts.rootName} { /* ... */ }`];
     }),
-  }
-})
+  };
+});
 
 // -----------------------------------------------------
 
 describe('EventTypeGenerator', () => {
 
-  let fakeProcessor = new SuiBatchProcessor().addEvent('AlphaEvent', { MoveEventType: '0x1::mod::Alpha' }).addEvent('BetaEvent', { MoveEventType: '0x1::mod::Beta' })
-  let data = {  
+  let fakeProcessor = new SuiBatchProcessor().addEvent('AlphaEvent', { MoveEventType: '0x1::mod::Alpha' }).addEvent('BetaEvent', { MoveEventType: '0x1::mod::Beta' });
+  const data = {  
     "amount": "100099",
     "asset": {
-      "name": "5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN"
+      "name": "5d4b302506645c37ff133b98c4b50a5ae14841659738d6d733d59d0d217a93bf::coin::COIN",
     },
     "borrow_fee": "100",
     "borrower": "0xba790950d26e9aebf6c903769c8f2c5b8d270656568f0ec97277dae5d6e940c9",
     "obligation": "0xfeb669c022744165719442316e3abf4828cfa06e2664fbb760bce9ac6fe684ef",
-    "time": "1700394636"
-  }
+    "time": "1700394636",
+  };
 
    beforeEach(() => {
-    vi.clearAllMocks()
+    vi.clearAllMocks();
 
     fakeProcessor = new SuiBatchProcessor()
       .addEvent('AlphaEvent', { MoveEventType: '0x1::mod::Alpha' })
@@ -57,43 +57,42 @@ describe('EventTypeGenerator', () => {
         },
       ],
     }) as any;
-  })
-
+  });
 
   it('collectEventTypes gathers all unique MoveEventType strings', () => {
-    const gen = new EventTypeGenerator(fakeProcessor)
-    const types = gen.collectEventTypes() 
-    expect(types.sort()).toEqual([])
-  })
+    const gen = new EventTypeGenerator(fakeProcessor);
+    const types = gen.collectEventTypes(); 
+    expect(types.sort()).toEqual([]);
+  });
 
   it('generateTypesFromJson returns TS interface text via json-to-ts', () => {
-    const gen = new EventTypeGenerator(fakeProcessor as SuiBatchProcessor)
-    const sampleJson = { foo: 'bar' }
-    const tsText = gen.generateTypesFromJson(sampleJson, 'MyRoot')
+    const gen = new EventTypeGenerator(fakeProcessor as SuiBatchProcessor);
+    const sampleJson = { foo: 'bar' };
+    const tsText = gen.generateTypesFromJson(sampleJson, 'MyRoot');
     // Our mock returns a single-element array: ["export interface MyRoot { /* ... */ }"]
-    expect(tsText).toContain('export interface MyRoot')
-    expect(tsText).toContain('{ /* ... */ }')
-  })
+    expect(tsText).toContain('export interface MyRoot');
+    expect(tsText).toContain('{ /* ... */ }');
+  });
 
   it('querySampleEvent fetches parsedJson from client.queryEvents', async () => {
-    const gen = new EventTypeGenerator(fakeProcessor as SuiBatchProcessor)
-    const filter: SuiEventFilter = { MoveEventType: '0xc38f849e81cfe46d4e4320f508ea7dda42934a329d5a6571bb4c3cb6ea63f5da::borrow::BorrowEventV2' }
-    const result = await gen.querySampleEvent(filter, 'BorrowEventV2')
-    expect(result).toEqual(data)
+    const gen = new EventTypeGenerator(fakeProcessor as SuiBatchProcessor);
+    const filter: SuiEventFilter = { MoveEventType: '0xc38f849e81cfe46d4e4320f508ea7dda42934a329d5a6571bb4c3cb6ea63f5da::borrow::BorrowEventV2' };
+    const result = await gen.querySampleEvent(filter, 'BorrowEventV2');
+    expect(result).toEqual(data);
     expect(fakeProcessor.client.queryEvents).toHaveBeenCalledWith({
       query: filter,
       limit: 1000,
       order: 'descending',
-    })
-  })
+    });
+  });
 
   it('run writes TS files for each MoveEventType in generatePath', async () => {
     // Arrange: override generatePath to a test folder
-    const gen = new EventTypeGenerator(fakeProcessor as SuiBatchProcessor)
-    gen.setGeneratePath('./tmp_event_types')
+    const gen = new EventTypeGenerator(fakeProcessor as SuiBatchProcessor);
+    gen.setGeneratePath('./tmp_event_types');
 
     // Run the generator
-    await gen.run()
+    await gen.run();
 
     // const fs = await vi.importMocked('fs')
     // const { writeFileSync, mkdirSync } = fs as {
@@ -124,5 +123,5 @@ describe('EventTypeGenerator', () => {
     // // our mock returns "export interface <TypeName> { /* ... */ }"
     // expect(fileContents[0]).toMatch(/export interface/)
     // expect(fileContents[1]).toMatch(/export interface/)
-  })
-})
+  });
+});

@@ -5,7 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "vitest run --silent=false"
+    "lint": "eslint --fix .",
+    "test": "vitest run --silent=false",
+    "tsc:lint": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "^22.15.29"
@@ -16,5 +18,8 @@
     "@mysten/sui": "1.12.0",
     "p-queue": "^8.0.1",
     "p-retry": "^6.2.1"
+  },
+   "engines": {
+    "node": ">=18"
   }
 }
