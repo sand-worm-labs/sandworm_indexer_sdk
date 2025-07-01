@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { SuiEventFilter } from '@mysten/sui/client';
 import * as fs from 'fs';
+
 import SuiBatchProcessor from '../sui/processor/src/processor';
 
 vi.mock('@sdk/sui/utils', () => ({
