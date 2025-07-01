@@ -21,7 +21,7 @@
     "url": "git+https://github.com/sand-worm-labs/sandworm_indexer_sdk.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@sandworm/sui_scallop-example.test.js"
+    "testxk": "node ./__tests__/@sandworm/sui_scallop-example.test.js"
   },
   "bugs": {
     "url": "https://github.com/sand-worm-labs/sandworm_indexer_sdk/issues"

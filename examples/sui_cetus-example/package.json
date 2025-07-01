@@ -21,7 +21,7 @@
     "url": "git+https://github.com/sand-worm-labs/sandworm_indexer_sdk.git"
   },
   "scripts": {
-    "test": "node ./__tests__/@sandworm/sui_cetus-example.test.js"
+    "testxd": "node ./__tests__/@sandworm/sui_cetus-example.test.js"
   },
   "bugs": {
     "url": "https://github.com/sand-worm-labs/sandworm_indexer_sdk/issues"
